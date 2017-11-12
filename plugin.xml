@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin 
+  xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-esptouch" version="1.0.1">
+  <name>Cordova esptouch</name>
+  <description>Cordova Cordova esptouch plugin for esp8266 and ESP32</description>
+  <license>Apache 2.0</license>
+  <keywords>cordova,console</keywords>
+  <repo>https://github.com/coloz/cordova-plugin-esptouch.git</repo>
+  <js-module name="esptouch" src="www/esptouch.js">
+    <clobbers target="esptouch"/>
+  </js-module>
+  <!-- 	android platform -->
+  <platform name="android">
+    <config-file target="AndroidManifest.xml" parent="/manifest">
+      <uses-permission android:name="android.permission.INTERNET" />
+      <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+      <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+      <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+    </config-file>
+    <config-file parent="/*" target="res/xml/config.xml">
+      <feature name="esptouch">
+        <param name="android-package" value="com.coloz.esptouch.esptouch"/>
+        <param name="onload" value="true" />
+      </feature>
+    </config-file>
+    <source-file src="src/android/esptouch.java" target-dir="src/com/coloz/esptouch/" />
+    <source-file src="src/android/libEsptouch_v0.3.4.6.jar" target-dir="src/com"/>
+  </platform>
+  <!-- 	ios platform -->
+  <platform name="ios">
+    <config-file target="config.xml" parent="/*">
+      <feature name="esptouch">
+        <param name="ios-package" value="esptouch"/>
+      </feature>
+    </config-file>
+    <header-file src="src/ios/esptouch.h"/>
+    <source-file src="src/ios/esptouch.m"/>
+    <source-file src="src/ios/libEsptouch_v0.3.5.3.a"/>
+    <framework src="CoreGraphics.framework" />
+    <framework src="UIKit.framework" />
+    <framework src="Foundation.framework" />
+  </platform>
+</plugin>
