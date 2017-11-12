@@ -2,7 +2,7 @@
 
 配合esp8266、esp32进行esptouch配网的cordova插件，使用，可用于ionic、cordova项目  
 
-##支持平台
+##支持平台  
 ios  
 android  
 
