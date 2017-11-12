@@ -1,6 +1,22 @@
 # cordova-plugin-esptouch
 
+配合esp8266、esp32进行esptouch配网的cordova插件，使用，可用于ionic、cordova项目  
+
+##支持平台
+ios  
+android  
+
+##参考引用
+https://github.com/EspressifApp/LibEsptouchForIOS  
+https://github.com/EspressifApp/LibEsptouchForAndroid  
+https://github.com/xumingxin7398/cordovaEsptouch
+
 ##使用方法
+
+```
+cordova plugin add cordova-plugin-esptouch
+```
+  
 ```
 declare var esptouch;
 
