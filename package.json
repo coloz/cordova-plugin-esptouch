@@ -13,7 +13,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/coloz/cordova-plugin-esptouch.git"
+    "url": "https://github.com/coloz/cordova-plugin-esptouch.git"
+  },
+  "bugs": {
+    "url": "https://github.com/coloz/cordova-plugin-esptouch/issues"
   },
   "keywords": [
     "ecosystem:cordova",
@@ -24,12 +27,9 @@
   "engines": {
     "cordovaDependencies": {
       "1.0.0": {
-        "cordova": ">3.0.0"
+        "cordova": ">300"
       }
     }
-  },
-  "bugs": {
-    "url": "https://github.com/coloz/cordova-plugin-esptouch/issues"
   },
   "homepage": "https://github.com/coloz/cordova-plugin-esptouch#readme"
 }
