@@ -24,7 +24,7 @@
       </feature>
     </config-file>
     <source-file src="src/android/esptouch.java" target-dir="src/com/coloz/esptouch/" />
-    <source-file src="src/android/libEsptouch_v0.3.4.6.jar" target-dir="src/com"/>
+    <source-file src="src/android/libEsptouch_v0.3.4.6.jar" target-dir="lib/"/>
   </platform>
   <!-- 	ios platform -->
   <platform name="ios">
