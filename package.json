@@ -15,8 +15,17 @@
   },
   "keywords": [
     "cordova",
-    "esptouch"
+    "esptouch",
+    "cordova-android",
+    "cordova-ios"
   ],
+  "engines": {
+    "cordovaDependencies": {
+      "1.0.0": {
+        "cordova": ">3.0.0"
+      }
+    }
+  },
   "author": "coloz",
   "license": "MIT",
   "bugs": {
