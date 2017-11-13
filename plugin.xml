@@ -35,7 +35,8 @@
     </config-file>
     <header-file src="src/ios/esptouch.h"/>
     <source-file src="src/ios/esptouch.m"/>
-    <source-file src="src/ios/libEsptouch_v0.3.5.3.a"/>
+    <source-file src="src/ios/esptouch"/>
+    <source-file src="src/ios/libEsptouch_v0.3.5.3.a" framework="true"/>
     <framework src="CoreGraphics.framework" />
     <framework src="UIKit.framework" />
     <framework src="Foundation.framework" />
