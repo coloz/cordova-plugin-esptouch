@@ -27,3 +27,6 @@ esptouch.start(ssid, "00:00:00:00", password, "NO", 1,
 esptouch.stop(res => { console.log(res) }, err => { console.log(err) });
 
 ```
+
+
+forked from https://github.com/t2wu/cordova-plugin-smartconfig  
