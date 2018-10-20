@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<plugin 
-  xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-esptouch" version="1.0.3">
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-esptouch" version="1.0.3">
   <name>Cordova esptouch</name>
-  <description>Cordova Cordova esptouch plugin for esp8266 and ESP32</description>
+  <description>Cordova esptouch plugin for esp8266 and ESP32</description>
   <license>Apache 2.0</license>
   <keywords>cordova,console</keywords>
   <repo>https://github.com/coloz/cordova-plugin-esptouch.git</repo>
+
+  <engines>
+    <engine name="cordova-android" version=">=6.3.0" />
+  </engines>
+
   <js-module name="esptouch" src="www/esptouch.js">
     <clobbers target="esptouch"/>
   </js-module>
+
   <!-- 	android platform -->
   <platform name="android">
-    <config-file target="AndroidManifest.xml" parent="/manifest">
+    <config-file target="AndroidManifest.xml" parent="/*">
       <uses-permission android:name="android.permission.INTERNET" />
       <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
       <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -24,7 +29,7 @@
       </feature>
     </config-file>
     <source-file src="src/android/esptouch.java" target-dir="src/com/coloz/esptouch/" />
-    <source-file src="src/android/libEsptouch_v0.3.4.6.jar" target-dir="libs/"/>
+    <lib-file src="src/android/libEsptouch_v0.3.4.6.jar" />
   </platform>
   <!-- 	ios platform -->
   <platform name="ios">
