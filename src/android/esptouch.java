@@ -21,14 +21,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public static byte[] strToByteArray(String str) {
-    if (str == null) {
-        return null;
-    }
-    byte[] byteArray = str.getBytes();
-    return byteArray;
-}
-
 public class esptouch extends CordovaPlugin {
     CallbackContext receivingCallbackContext = null;
     IEsptouchTask mEsptouchTask;
@@ -39,27 +31,31 @@ public class esptouch extends CordovaPlugin {
         super.initialize(cordova, webView);
     }
 
+    public static byte[] strToByteArray(String str) {
+        if (str == null) {
+            return null;
+        }
+        byte[] byteArray = str.getBytes();
+        return byteArray;
+    }
+
     @Override
     public boolean execute(String action, final JSONArray args, final CallbackContext callbackContext)
             throws JSONException {
         receivingCallbackContext = callbackContext; //modified by lianghuiyuan
         if (action.equals("start")) {
-            byte[] apSsid = args.getString(0);
-            byte[] apBssid = args.getString(1);
-            byte[] apPassword = args.getString(2);
-            byte[] isSsidHiddenStr = args.getString(3);
-            byte[] taskResultCountStr = args.getString(4);
-            final int taskResultCount = Integer.parseInt(taskResultCountStr);
+            byte[] apSsid = strToByteArray(args.getString(0));
+            byte[] apBssid = strToByteArray(args.getString(1);
+            byte[] apPassword = strToByteArray(args.getString(2);
+            byte[] deviceCountData = strToByteArray(args.getString(3));
+            byte[] broadcastData = strToByteArray(args.getString(4));
+            int taskResultCount = deviceCountData.length == 0 ? -1 : Integer.parseInt(new String(deviceCountData));
             final Object mLock = new Object();
             cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
                     synchronized (mLock) {
-                        boolean isSsidHidden = false;
-                        if (isSsidHiddenStr.equals("YES")) {
-                            isSsidHidden = true;
-                        }
-                        mEsptouchTask = new EsptouchTask(apSsid, apBssid, apPassword, isSsidHidden,
-                                cordova.getActivity());
+                        mEsptouchTask = new EsptouchTask(apSsid, apBssid, apPassword,cordova.getActivity());
+                        mEsptouchTask.setPackageBroadcast(broadcastData[0] == 1);
                         mEsptouchTask.setEsptouchListener(myListener);
                     }
                     List<IEsptouchResult> resultList = mEsptouchTask.executeForResults(taskResultCount);
