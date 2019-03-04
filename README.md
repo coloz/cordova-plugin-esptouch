@@ -27,7 +27,7 @@ cordova plugin add cordova-plugin-esptouch@1.0.3
 ```javascript
 declare var esptouch;
 
-esptouch.start(ssid, "00:00:00:00", password, "1", "1",
+esptouch.start(ssid, "00:00:00:00:00:00", password, "1", "1",
   res => { this.configComplete(res) },
   err => { this.configError(err) });
 }
