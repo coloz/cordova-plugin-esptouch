@@ -1,5 +1,9 @@
 # cordova-plugin-esptouch  
 配合esp8266、esp32进行esptouch配网的cordova插件，使用Espressif最新的库，可用于ionic、cordova项目  
+
+# espTouch lib版本：  
+android：0.3.7.0  
+ios：0.3.5.3  
   
 ## 支持平台  
 ios  
@@ -23,7 +27,7 @@ cordova plugin add cordova-plugin-esptouch@1.0.3
 ```javascript
 declare var esptouch;
 
-esptouch.start(ssid, "00:00:00:00", password, "NO", 1,
+esptouch.start(ssid, "00:00:00:00", password, "1", "1",
   res => { this.configComplete(res) },
   err => { this.configError(err) });
 }
