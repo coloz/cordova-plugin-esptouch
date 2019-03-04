@@ -21,6 +21,14 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+public static byte[] strToByteArray(String str) {
+    if (str == null) {
+        return null;
+    }
+    byte[] byteArray = str.getBytes();
+    return byteArray;
+}
+
 public class esptouch extends CordovaPlugin {
     CallbackContext receivingCallbackContext = null;
     IEsptouchTask mEsptouchTask;
@@ -36,11 +44,11 @@ public class esptouch extends CordovaPlugin {
             throws JSONException {
         receivingCallbackContext = callbackContext; //modified by lianghuiyuan
         if (action.equals("start")) {
-            final String apSsid = args.getString(0);
-            final String apBssid = args.getString(1);
-            final String apPassword = args.getString(2);
-            final String isSsidHiddenStr = args.getString(3);
-            final String taskResultCountStr = args.getString(4);
+            byte[] apSsid = args.getString(0);
+            byte[] apBssid = args.getString(1);
+            byte[] apPassword = args.getString(2);
+            byte[] isSsidHiddenStr = args.getString(3);
+            byte[] taskResultCountStr = args.getString(4);
             final int taskResultCount = Integer.parseInt(taskResultCountStr);
             final Object mLock = new Object();
             cordova.getThreadPool().execute(new Runnable() {
