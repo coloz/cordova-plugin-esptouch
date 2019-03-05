@@ -45,8 +45,8 @@ public class esptouch extends CordovaPlugin {
         receivingCallbackContext = callbackContext; //modified by lianghuiyuan
         if (action.equals("start")) {
             byte[] apSsid = strToByteArray(args.getString(0));
-            byte[] apBssid = strToByteArray(args.getString(1);
-            byte[] apPassword = strToByteArray(args.getString(2);
+            byte[] apBssid = strToByteArray(args.getString(1));
+            byte[] apPassword = strToByteArray(args.getString(2));
             byte[] deviceCountData = strToByteArray(args.getString(3));
             byte[] broadcastData = strToByteArray(args.getString(4));
             int taskResultCount = deviceCountData.length == 0 ? -1 : Integer.parseInt(new String(deviceCountData));
