@@ -22,7 +22,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class esptouch extends CordovaPlugin {
-    CallbackContext receivingCallbackContext = null;
     IEsptouchTask mEsptouchTask;
     private static final String TAG = "esptouch";
 
@@ -42,7 +41,6 @@ public class esptouch extends CordovaPlugin {
     @Override
     public boolean execute(String action, final JSONArray args, final CallbackContext callbackContext)
             throws JSONException {
-        receivingCallbackContext = callbackContext; //modified by lianghuiyuan
         if (action.equals("start")) {
             byte[] apSsid = strToByteArray(args.getString(0));
             byte[] apBssid = strToByteArray(args.getString(1));
@@ -56,7 +54,7 @@ public class esptouch extends CordovaPlugin {
                     synchronized (mLock) {
                         mEsptouchTask = new EsptouchTask(apSsid, apBssid, apPassword,cordova.getActivity());
                         mEsptouchTask.setPackageBroadcast(broadcastData[0] == 1);
-                        mEsptouchTask.setEsptouchListener(myListener);
+                        // mEsptouchTask.setEsptouchListener(myListener);
                     }
                     List<IEsptouchResult> resultList = mEsptouchTask.executeForResults(taskResultCount);
                     IEsptouchResult firstResult = resultList.get(0);
@@ -78,23 +76,22 @@ public class esptouch extends CordovaPlugin {
                                         + " more resultList(s) without showing\n");
                             }
                             PluginResult result = new PluginResult(PluginResult.Status.OK, "Finished: " + sb);
-                            result.setKeepCallback(true); // keep callback after this call
-                            receivingCallbackContext.sendPluginResult(result);
-                            //receivingCallbackContext.success("finished");
+                            result.setKeepCallback(true);
+                            callbackContext.sendPluginResult(result);
                         } else {
                             PluginResult result = new PluginResult(PluginResult.Status.ERROR, "No Device Found!");
-                            result.setKeepCallback(true); // keep callback after this call
-                            receivingCallbackContext.sendPluginResult(result);
+                            result.setKeepCallback(true);
+                            callbackContext.sendPluginResult(result);
                         }
                     }
                 }
-            }//end runnable
+            }
             );
             return true;
         } else if (action.equals("stop")) {
             mEsptouchTask.interrupt();
             PluginResult result = new PluginResult(PluginResult.Status.OK, "Cancel Success");
-            result.setKeepCallback(true); // keep callback after this call
+            result.setKeepCallback(true);
             receivingCallbackContext.sendPluginResult(result);
             return true;
         } 
@@ -105,13 +102,13 @@ public class esptouch extends CordovaPlugin {
     }
 
     //listener to get result
-    private IEsptouchListener myListener = new IEsptouchListener() {
-        @Override
-        public void onEsptouchResultAdded(final IEsptouchResult result) {
-            String text = "bssid=" + result.getBssid() + ",InetAddress=" + result.getInetAddress().getHostAddress();
-            PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, text);
-            pluginResult.setKeepCallback(true); // keep callback after this call
-            //receivingCallbackContext.sendPluginResult(pluginResult);    //modified by lianghuiyuan
-        }
-    };
+    // private IEsptouchListener myListener = new IEsptouchListener() {
+    //     @Override
+    //     public void onEsptouchResultAdded(final IEsptouchResult result) {
+    //         String text = "bssid=" + result.getBssid() + ",InetAddress=" + result.getInetAddress().getHostAddress();
+    //         PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, text);
+    //         pluginResult.setKeepCallback(true);
+    //         receivingCallbackContext.sendPluginResult(pluginResult);
+    //     }
+    // };
 }
