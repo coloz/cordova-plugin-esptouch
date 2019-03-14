@@ -43,24 +43,24 @@ public class esptouch extends CordovaPlugin {
   private IEsptouchListener myListener = new IEsptouchListener() {
     @Override
     public void onEsptouchResultAdded(final IEsptouchResult result) {
-      Log.i(TAG, "device: "+result.getInetAddress().getHostAddress());
-      cordova.getThreadPool().execute(new Runnable() {
-        @Override
-        public void run() {
-          JSONObject device=new JSONObject();
-//          String text = "bssid=" + result.getBssid() + ",InetAddress=" + result.getInetAddress().getHostAddress();
-          try {
-          device.put("bssid",result.getBssid());
-          device.put("ip",result.getInetAddress().getHostAddress());
-          } catch (JSONException e) {
-            Log.e(TAG, "unexpected JSON exception", e);
-            // Do something to recover ... or kill the app.
+      if (result.isSuc()) {
+        Log.i(TAG, "device: " + result.getInetAddress().getHostAddress());
+        cordova.getThreadPool().execute(new Runnable() {
+          @Override
+          public void run() {
+            JSONObject device = new JSONObject();
+            try {
+              device.put("bssid", result.getBssid());
+              device.put("ip", result.getInetAddress().getHostAddress());
+            } catch (JSONException e) {
+              Log.e(TAG, "unexpected JSON exception", e);
+            }
+            PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, device);
+            pluginResult.setKeepCallback(true);
+            esptouchCallbackContext.sendPluginResult(pluginResult);
           }
-          PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, device);
-          pluginResult.setKeepCallback(true);
-          esptouchCallbackContext.sendPluginResult(pluginResult);
-        }
-      });
+        });
+      }
     }
   };
 
@@ -69,7 +69,7 @@ public class esptouch extends CordovaPlugin {
     throws JSONException {
     if (action.equals("start")) {
       int taskResultCount;
-      esptouchCallbackContext=callbackContext;
+      esptouchCallbackContext = callbackContext;
       synchronized (mLock) {
         byte[] apSsid = strToByteArray(args.getString(0));
         byte[] apBssid = strToByteArray(args.getString(1));
@@ -81,47 +81,41 @@ public class esptouch extends CordovaPlugin {
         mEsptouchTask.setPackageBroadcast(broadcastData[0] == 1);
         mEsptouchTask.setEsptouchListener(myListener);
       }
-//      mEsptouchTask.executeForResult();
-      mEsptouchTask.executeForResults(taskResultCount);
-//      final Object mLock = new Object();
-//      cordova.getThreadPool().execute(new Runnable() {
-//                                        public void run() {
-//                                          synchronized (mLock) {
-//                                            mEsptouchTask = new EsptouchTask(apSsid, apBssid, apPassword, cordova.getActivity());
-//                                            mEsptouchTask.setPackageBroadcast(broadcastData[0] == 1);
-//                                             mEsptouchTask.setEsptouchListener(myListener);
-//                                          }
-//                                          List<IEsptouchResult> resultList = mEsptouchTask.executeForResults(taskResultCount);
-//                                          IEsptouchResult firstResult = resultList.get(0);
-//                                          if (!firstResult.isCancelled()) {
-//                                            int count = 0;
-//                                            final int maxDisplayCount = taskResultCount;
-//                                            if (firstResult.isSuc()) {
-//                                              StringBuilder sb = new StringBuilder();
-//                                              for (IEsptouchResult resultInList : resultList) {
-//                                                sb.append("device" + count + ",bssid=" + resultInList.getBssid() + ",InetAddress="
-//                                                  + resultInList.getInetAddress().getHostAddress() + ".");
-//                                                count++;
-//                                                if (count >= maxDisplayCount) {
-//                                                  break;
-//                                                }
-//                                              }
-//                                              if (count < resultList.size()) {
-//                                                sb.append("\nthere's " + (resultList.size() - count)
-//                                                  + " more resultList(s) without showing\n");
-//                                              }
-//                                              PluginResult result = new PluginResult(PluginResult.Status.OK, "Finished: " + sb);
-//                                              result.setKeepCallback(true);
-//                                              callbackContext.sendPluginResult(result);
-//                                            } else {
-//                                              PluginResult result = new PluginResult(PluginResult.Status.ERROR, "No Device Found!");
-//                                              result.setKeepCallback(true);
-//                                              callbackContext.sendPluginResult(result);
-//                                            }
-//                                          }
-//                                        }
-//                                      }
-//      );
+      cordova.getThreadPool().execute(
+        new Runnable() {
+          @Override
+          public void run() {
+            List<IEsptouchResult> resultList = mEsptouchTask.executeForResults(taskResultCount);
+            IEsptouchResult firstResult = resultList.get(0);
+            if (!firstResult.isCancelled()) {
+              int count = 0;
+              final int maxDisplayCount = taskResultCount;
+              if (firstResult.isSuc()) {
+                StringBuilder sb = new StringBuilder();
+                for (IEsptouchResult resultInList : resultList) {
+                  sb.append("device" + count + ",bssid=" + resultInList.getBssid() + ",InetAddress="
+                    + resultInList.getInetAddress().getHostAddress() + ".");
+                  count++;
+                  if (count >= maxDisplayCount) {
+                    break;
+                  }
+                }
+                if (count < resultList.size()) {
+                  sb.append("\nthere's " + (resultList.size() - count)
+                    + " more resultList(s) without showing\n");
+                }
+                PluginResult result = new PluginResult(PluginResult.Status.OK, "Finished: " + sb);
+                result.setKeepCallback(true);
+                callbackContext.sendPluginResult(result);
+              } else {
+                PluginResult result = new PluginResult(PluginResult.Status.ERROR, "No Device Found!");
+                result.setKeepCallback(true);
+                callbackContext.sendPluginResult(result);
+              }
+            }
+          }
+        }
+      );
       return true;
     } else if (action.equals("stop")) {
       mEsptouchTask.interrupt();
