@@ -44,7 +44,6 @@ public class esptouch extends CordovaPlugin {
     @Override
     public void onEsptouchResultAdded(final IEsptouchResult result) {
       if (result.isSuc()) {
-        Log.i(TAG, "device: " + result.getInetAddress().getHostAddress());
         cordova.getThreadPool().execute(new Runnable() {
           @Override
           public void run() {
@@ -90,27 +89,8 @@ public class esptouch extends CordovaPlugin {
             if (!firstResult.isCancelled()) {
               int count = 0;
               final int maxDisplayCount = taskResultCount;
-              if (firstResult.isSuc()) {
-                StringBuilder sb = new StringBuilder();
-                for (IEsptouchResult resultInList : resultList) {
-                  sb.append("device" + count + ",bssid=" + resultInList.getBssid() + ",InetAddress="
-                    + resultInList.getInetAddress().getHostAddress() + ".");
-                  count++;
-                  if (count >= maxDisplayCount) {
-                    break;
-                  }
-                }
-                if (count < resultList.size()) {
-                  sb.append("\nthere's " + (resultList.size() - count)
-                    + " more resultList(s) without showing\n");
-                }
-                PluginResult result = new PluginResult(PluginResult.Status.OK, "Finished: " + sb);
-                result.setKeepCallback(true);
-                callbackContext.sendPluginResult(result);
-              } else {
-                PluginResult result = new PluginResult(PluginResult.Status.ERROR, "No Device Found!");
-                result.setKeepCallback(true);
-                callbackContext.sendPluginResult(result);
+              if (!firstResult.isSuc()) {
+                callbackContext.error("No Device Found");
               }
             }
           }
@@ -120,13 +100,8 @@ public class esptouch extends CordovaPlugin {
     } else if (action.equals("stop")) {
       mEsptouchTask.interrupt();
       callbackContext.success();
-//      PluginResult result = new PluginResult(PluginResult.Status.OK, "Cancel Success");
-//      result.setKeepCallback(true);
-//      callbackContext.sendPluginResult(result);
-//      return true;
     } else {
       callbackContext.error("can not find the function " + action);
-//      return false;
     }
     return true;
   }
