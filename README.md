@@ -1,3 +1,5 @@
+注意：当前版本只能在android上使用，由于我没有mac，暂时无法提供新的IOS支持。  
+
 # cordova-plugin-esptouch  
 配合esp8266、esp32进行esptouch配网的cordova插件，使用Espressif最新的库，可用于ionic、cordova项目  
 
