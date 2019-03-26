@@ -72,4 +72,10 @@
  * @return byte converted from bssid
  */
 + (NSData *) parseBssid2bytes: (NSString *) bssid;
+
+/**
+ * send a dummy GET to "https://8.8.8.8" just to get Network Permission after ios10.0(including)
+ */
++ (void) tryOpenNetworkPermission;
+
 @end

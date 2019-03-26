@@ -5,16 +5,18 @@
 @property (nonatomic, weak) id <CDVCommandDelegate> commandDelegate;
 
 @end
-
+NSString *callback_ID;
 @implementation EspTouchDelegateImpl
 
 -(void) onEsptouchResultAddedWithResult: (ESPTouchResult *) result
 {
     NSString *InetAddress=[ESP_NetUtil descriptionInetAddr4ByData:result.ipAddrData];
-    NSString *text=[NSString stringWithFormat:@"bssid=%@,InetAddress=%@",result.bssid,InetAddress];
     CDVPluginResult* pluginResult = nil;
-    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString: text];
+    NSDictionary *dic =@{@"bssid":result.bssid,@"ip":InetAddress};
+    NSLog(@"收到onEsptouchResultAddedWithResult bssid:%@ ip:%@",result.bssid,InetAddress);
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary: dic];
     [pluginResult setKeepCallbackAsBool:true];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:callback_ID];
 }
 @end
 
@@ -26,17 +28,17 @@
         dispatch_queue_t  queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
         
         [self._condition lock];
+        callback_ID = command.callbackId;
         NSString *apSsid = (NSString *)[command.arguments objectAtIndex:0];
         NSString *apBssid = (NSString *)[command.arguments objectAtIndex:1];
         NSString *apPwd = (NSString *)[command.arguments objectAtIndex:2];
-        NSString *isSsidHiddenStr=(NSString *)[command.arguments objectAtIndex:3];
-        
-        BOOL isSsidHidden = true;
-        if([isSsidHiddenStr compare:@"NO"]==NSOrderedSame){
-            isSsidHidden=false;
+        int taskCount = [[command.arguments objectAtIndex:3] intValue];
+        NSString *broadcastData =  (NSString *)[command.arguments objectAtIndex:4];
+        BOOL isbroadcastData = true;
+        if([broadcastData compare:@"1"]==NSOrderedSame){
+            isbroadcastData=false;
         }
-        int taskCount = [[command.arguments objectAtIndex:4] intValue];
-        
+
         NSLog(@"ssid: %@, bssid: %@, apPwd: %@", apSsid, apBssid, apPwd);
         //        self._esptouchTask =
         //        [[ESPTouchTask alloc]initWithApSsid:apSsid andApBssid:apBssid andApPwd:apPwd andIsSsidHiden:isSsidHidden]; // deprecated
@@ -63,9 +65,11 @@
                         ESPTouchResult *resultInArray = [esptouchResultArray objectAtIndex:0];
                         NSString *ipaddr = [ESP_NetUtil descriptionInetAddr4ByData:resultInArray.ipAddrData];
                         // device0 I think is suppose to be the index
-                        NSString *result = [NSString stringWithFormat:@"Finished: device0,bssid=%@,InetAddress=%@.", resultInArray.bssid, ipaddr];
+                        //NSString *result = [NSString stringWithFormat:@"Finished: device0,bssid=%@,InetAddress=%@.", resultInArray.bssid, ipaddr];
                         CDVPluginResult* pluginResult = nil;
-                        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:result];
+                        NSDictionary *dic =@{@"bssid":resultInArray.bssid,@"ip":ipaddr};
+                        //NSLog(@"收到 json:%@",dic);
+                        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:dic];
                         
                         [pluginResult setKeepCallbackAsBool:true];
                         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];

@@ -5,16 +5,25 @@
 //  Created by 白 桦 on 4/14/15.
 //  Copyright (c) 2015 白 桦. All rights reserved.
 //
+#import <UIKit/UIKit.h>
+@interface ESPAppDelegate : UIResponder <UIApplicationDelegate>
+@property (strong, nonatomic) UIWindow *window;
+@end
 
 #import <Foundation/Foundation.h>
 #import "ESPTouchResult.h"
 #import "ESPTouchDelegate.h"
+#import "ESPAES.h"
+
+#define ESPTOUCH_VERSION    @"v0.3.7.0"
 
 #define DEBUG_ON   YES
 
 @interface ESPTouchTask : NSObject
 
 @property (atomic,assign) BOOL isCancelled;
+
+- (id)initWithApSsid:(NSString *)apSsid andApBssid:(NSString *)apBssid andApPwd:(NSString *)apPwd andAES:(ESPAES *)aes;
 
 /**
  * Constructor of EsptouchTask
@@ -110,4 +119,9 @@
  */
 - (void) setEsptouchDelegate: (NSObject<ESPTouchDelegate> *) esptouchDelegate;
 
+/**
+ * Set boradcast or multicast when post config info
+ * @param broadcast YES is boradcast, NO is multicast
+ */
+- (void) setPackageBroadcast: (BOOL) broadcast;
 @end

@@ -3,6 +3,7 @@
 #import "esptouch/ESPTouchTask.h"
 #import "esptouch/ESPTouchResult.h"
 #import "esptouch/ESP_NetUtil.h"
+#import "esptouch/ESPDataCode.h"
 #import "esptouch/ESPTouchDelegate.h"
 
 
