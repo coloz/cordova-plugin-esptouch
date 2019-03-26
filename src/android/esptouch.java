@@ -70,11 +70,11 @@ public class esptouch extends CordovaPlugin {
       int taskResultCount;
       esptouchCallbackContext = callbackContext;
       synchronized (mLock) {
-        byte[] apSsid = strToByteArray(args.getString(0));
-        byte[] apBssid = strToByteArray(args.getString(1));
-        byte[] apPassword = strToByteArray(args.getString(2));
-        byte[] deviceCountData = strToByteArray(args.getString(3));
-        byte[] broadcastData = strToByteArray(args.getString(4));
+        final byte[] apSsid = strToByteArray(args.getString(0));
+        final byte[] apBssid = strToByteArray(args.getString(1));
+        final byte[] apPassword = strToByteArray(args.getString(2));
+        final byte[] deviceCountData = strToByteArray(args.getString(3));
+        final byte[] broadcastData = strToByteArray(args.getString(4));
         taskResultCount = deviceCountData.length == 0 ? -1 : Integer.parseInt(new String(deviceCountData));
         mEsptouchTask = new EsptouchTask(apSsid, apBssid, apPassword, cordova.getActivity());
         mEsptouchTask.setPackageBroadcast(broadcastData[0] == 1);
