@@ -6,8 +6,8 @@ android：0.3.7.0
 ios：0.3.7.0  
   
 ## 支持平台  
-ios  
-android  
+ios 12.x 
+android 5+ 
 
 ## 参考引用  
 https://github.com/EspressifApp/LibEsptouchForIOS  
@@ -43,6 +43,9 @@ esptouch.stop(res => { console.log(res) }, err => { console.log(err) });
 ```json
 {"bssid":"ffffffffffff","ip":"192.168.1.123"}
 ```
+
+### 已知问题  
+当环境中有太多AP信号时，可能配网失败，但这不是本插件的问题  
 
 ## 网络乞讨  
 如果你觉得该项目不错，可以打个star支持下  
