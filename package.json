@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-esptouch",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "cordova plugin esptouch for esp8266 and esp32",
   "author": "coloz",
   "license": "MIT",
