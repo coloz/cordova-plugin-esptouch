@@ -77,7 +77,7 @@ public class esptouch extends CordovaPlugin {
         final byte[] broadcastData = strToByteArray(args.getString(4));
         taskResultCount = deviceCountData.length == 0 ? -1 : Integer.parseInt(new String(deviceCountData));
         mEsptouchTask = new EsptouchTask(apSsid, apBssid, apPassword, cordova.getActivity());
-        mEsptouchTask.setPackageBroadcast(broadcastData[0] == 1);
+        mEsptouchTask.setPackageBroadcast(broadcastData[0] == 49);
         mEsptouchTask.setEsptouchListener(myListener);
       }
       cordova.getThreadPool().execute(
