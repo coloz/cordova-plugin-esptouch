@@ -1,5 +1,6 @@
 # cordova-plugin-esptouch  
 配合esp8266、esp32进行esptouch配网的cordova插件，使用Espressif最新的库，可用于ionic、cordova项目  
+**个别环境下配网不了，这个是esp官方模块的问题，问题存在已久，官方一直没解决，不信的话，可以直接用esptouch官方app测试**  
 
 # espTouch lib版本  
 android：0.3.7.0  
