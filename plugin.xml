@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-esptouch" version="1.0.9">
-  <name>Cordova esptouch</name>
-  <description>Cordova esptouch plugin for esp8266 and ESP32</description>
+  <name>Cordova esptouch v2</name>
+  <description>Cordova esptouch v2 plugin for esp8266 and ESP32</description>
   <license>Apache 2.0</license>
   <keywords>cordova,console</keywords>
   <repo>https://github.com/coloz/cordova-plugin-esptouch.git</repo>
@@ -10,8 +10,8 @@
     <engine name="cordova-android" version=">=7.0.0" />
   </engines>
 
-  <js-module name="esptouch" src="www/esptouch.js">
-    <clobbers target="esptouch"/>
+  <js-module name="esptouch2" src="www/esptouch2.js">
+    <clobbers target="esptouch2"/>
   </js-module>
 
   <!-- 	android platform -->
@@ -23,13 +23,12 @@
       <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
     </config-file>
     <config-file parent="/*" target="res/xml/config.xml">
-      <feature name="esptouch">
-        <param name="android-package" value="com.coloz.esptouch.esptouch"/>
+      <feature name="esptouch2">
+        <param name="android-package" value="com.coloz.esptouch2.esptouch2"/>
         <param name="onload" value="true" />
       </feature>
     </config-file>
-    <source-file src="src/android/esptouch.java" target-dir="src/com/coloz/esptouch/" />
-    <lib-file src="src/android/libEsptouch_v0.3.7.0.jar" />
+    <source-file src="src/android/esptouch2.java" target-dir="src/com/coloz/esptouch2/" />
     <lib-file src="src/android/esptouch-v2-2.1.0.aar" />
   </platform>
   <!-- 	ios platform -->

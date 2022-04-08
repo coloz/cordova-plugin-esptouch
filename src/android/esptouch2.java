@@ -4,14 +4,6 @@ import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
-import androidx.core.app.ActivityCompat;
 
 import com.espressif.esptouch.android.EspTouchActivityAbs;
 import com.espressif.esptouch.android.EspTouchApp;
@@ -23,15 +15,20 @@ import com.espressif.iot.esptouch2.provision.EspSyncListener;
 import com.espressif.iot.esptouch2.provision.IEspProvisioner;
 import com.espressif.iot.esptouch2.provision.TouchNetUtil;
 
-import java.lang.ref.WeakReference;
-import java.net.InetAddress;
+import org.apache.cordova.CallbackContext;
+import org.apache.cordova.CordovaPlugin;
+
+import org.apache.cordova.*;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class esptouch extends CordovaPlugin {
   private EspProvisioner mProvisioner;
   private CallbackContext esptouchCallbackContext;
   private final Object mLock = new Object();
-  private static final String TAG = "esptouch_v2";
+  private static final String TAG = "esptouch2";
 
   @Override
   public void initialize(CordovaInterface cordova, CordovaWebView webView) {
@@ -95,15 +92,7 @@ public class esptouch extends CordovaPlugin {
       //   new Runnable() {
       //     @Override
       //     public void run() {
-      //       List<IEsptouchResult> resultList = mEsptouchTask.executeForResults(taskResultCount);
-      //       IEsptouchResult firstResult = resultList.get(0);
-      //       if (!firstResult.isCancelled()) {
-      //         int count = 0;
-      //         final int maxDisplayCount = taskResultCount;
-      //         if (!firstResult.isSuc()) {
-      //           callbackContext.error("No Device Found");
-      //         }
-      //       }
+
       //     }
       //   }
       // );
