@@ -30,6 +30,7 @@
     </config-file>
     <source-file src="src/android/esptouch.java" target-dir="src/com/coloz/esptouch/" />
     <lib-file src="src/android/libEsptouch_v0.3.7.0.jar" />
+    <lib-file src="src/android/esptouch-v2-2.1.0.aar" />
   </platform>
   <!-- 	ios platform -->
   <platform name="ios">
