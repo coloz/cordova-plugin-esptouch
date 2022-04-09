@@ -8,7 +8,7 @@
 
 # espTouch v2 lib版本  
 android：2.1.0  
-ios：还没写 
+ios：2.1.0  
   
 ## 支持平台  
 ios 12.x  

@@ -1,12 +1,11 @@
 #import <Cordova/CDVPlugin.h>
 #import <Cordova/CDVPluginResult.h>
-#import "esptouch/ESPTouchTask.h"
-#import "esptouch/ESPTouchResult.h"
-#import "esptouch/ESP_NetUtil.h"
-#import "esptouch/ESPDataCode.h"
-#import "esptouch/ESPTouchDelegate.h"
-
-
+#import "esptouch2/ESPPacketUtils.h"
+#import "esptouch2/ESPProvisioner.h"
+#import "esptouch2/ESPProvisioningParams.h"
+#import "esptouch2/ESPProvisioningRequest.h"
+#import "esptouch2/ESPProvisioningResult.h"
+#import "esptouch2/ESPProvisioningUDP.h"
 
 @interface esptouch : CDVPlugin
 @property (nonatomic, strong) NSCondition *_condition;
