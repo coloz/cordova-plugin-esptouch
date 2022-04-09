@@ -1,10 +1,10 @@
 var exec = require('cordova/exec');
 
 module.exports = {
-  start: function (apSsid, apBssid, apPassword, deviceCountData, broadcastData, successCallback, failCallback) {
-    exec(successCallback, failCallback, "esptouchV2", "start", [apSsid, apBssid, apPassword, deviceCountData, broadcastData]);
+  start: function (apSsid, apPassword, customData, successCallback, failCallback) {
+    exec(successCallback, failCallback, "esptouch2", "start", [apSsid, apPassword, customData]);
   },
   stop: function (successCallback, failCallback) {
-    exec(successCallback, failCallback, "esptouchV2", "stop", []);
+    exec(successCallback, failCallback, "esptouch2", "stop", []);
   }
 }

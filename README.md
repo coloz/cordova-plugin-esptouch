@@ -1,52 +1,47 @@
-# cordova-plugin-esptouch  
-配合esp8266、esp32进行esptouch配网的cordova插件，使用Espressif最新的库，可用于ionic、cordova项目  
-**个别环境下配网不了，这个是esp官方模块的问题，问题存在已久，官方一直没解决，不信的话，可以直接用esptouch官方app测试**  
+# cordova-plugin-esptouch-v2  
+**这是esptouch v2版本，和esptouch v1不兼容**  
+**当前版本只支持android，ios的空了再写**  
+配合esp8266、esp32进行esptouch v2配网的cordova插件，使用Espressif esptouch v2最新的库，可用于ionic、cordova项目  
 
-# espTouch lib版本  
-android：0.3.7.0  
-ios：0.3.7.0  
+如果需要使用esptouch v1，请访问[v1分支](https://github.com/coloz/cordova-plugin-esptouch/tree/v1)  
+
+
+# espTouch v2 lib版本  
+android：2.1.0  
+ios：还没写 
   
 ## 支持平台  
-ios 12.x 
-android 5+ 
+ios 12.x  
+android 5+  
 
 ## 参考引用  
-https://github.com/EspressifApp/LibEsptouchForIOS  
-https://github.com/EspressifApp/LibEsptouchForAndroid  
 https://github.com/EspressifApp/EsptouchForAndroid  
-https://github.com/t2wu/cordova-plugin-smartconfig  
-https://github.com/xumingxin7398/cordovaEsptouch  
+https://github.com/EspressifApp/lib-esptouch-v2-android  
+https://github.com/EspressifApp/EsptouchForIOS  
+https://github.com/EspressifApp/EsptouchForIOS/tree/master/EspTouchDemo/ESPTouchV2  
 
 ## 使用方法  
 ### 安装  
-cordova-android>7.0.0
 ```
-cordova plugin add cordova-plugin-esptouch
-```
-cordova-android<7.0.0
-```
-cordova plugin add cordova-plugin-esptouch@1.0.3
+cordova plugin add cordova-plugin-esptouch-v2
 ```
 
 ### 调用  
 ```javascript
-declare var esptouch;
+declare var esptouch2;
 
-esptouch.start(ssid, "00:00:00:00:00:00", password, "1", "1", 
+esptouch2.start(ssid, password, customData, 
   res => { console.log(res) },
   err => { console.log(err) });
 }
 
-esptouch.stop(res => { console.log(res) }, err => { console.log(err) });
+esptouch2.stop(res => { console.log(res) }, err => { console.log(err) });
 
 ```
 ### 输出  
 ```json
 {"bssid":"ffffffffffff","ip":"192.168.1.123"}
 ```
-
-### 已知问题  
-当环境中有太多AP信号时，可能配网失败，但这不是本插件的问题  
 
 ## 网络乞讨  
 如果你觉得该项目不错，可以打个star支持下  
