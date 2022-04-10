@@ -1,4 +1,5 @@
 #import "esptouch2.h"
+#import "ESP_ByteUtil.h"
 
 NSString *callback_ID;
 
@@ -8,7 +9,7 @@ NSString *callback_ID;
     NSLog(@"onProvisonScanResult: address=%@, bssid=%@", result.address, result.bssid);
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         NSDictionary *device =@{@"bssid":result.bssid,@"ip":result.address};
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary: device];
+        CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary: device];
         [pluginResult setKeepCallbackAsBool:true];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:callback_ID];
         // [self.resultArray addObject:result];
@@ -30,20 +31,20 @@ NSString *callback_ID;
         NSString *apSsid = (NSString *)[command.arguments objectAtIndex:0];
         NSString *apPassword = (NSString *)[command.arguments objectAtIndex:1];
         NSString *customData = (NSString *)[command.arguments objectAtIndex:2];
-
+        self.provisioner = [ESPProvisioner share];
         ESPProvisioningRequest *request = [[ESPProvisioningRequest alloc] init];
         request.ssid = [ESP_ByteUtil getBytesByNSString:apSsid];
         request.password = [ESP_ByteUtil getBytesByNSString:apPassword];
         request.reservedData = [ESP_ByteUtil getBytesByNSString:customData];
         // request.deviceCount = deviceCount;
         // request.aesKey = aesKey;
-        [provisioner startProvisioning:request withDelegate:self];
+        [self.provisioner startProvisioning:request withDelegate:self];
     }];
 }
 
 
 - (void) stop:(CDVInvokedUrlCommand *)command{
-    [provisioner stopProvisioning];
+    [self.provisioner stopProvisioning];
     CDVPluginResult* pluginResult = nil;
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString: @"cancel success"];
     [pluginResult setKeepCallbackAsBool:true];

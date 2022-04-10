@@ -1,9 +1,7 @@
 # cordova-plugin-esptouch-v2  
-**这是esptouch v2版本，和esptouch v1不兼容**  
-**当前版本只支持android，ios的空了再写**  
-配合esp8266、esp32进行esptouch v2配网的cordova插件，使用Espressif esptouch v2最新的库，可用于ionic、cordova项目  
+**这是esptouch v2版本，和esptouch v1不兼容，如果需要使用esptouch v1，请访问[v1分支](https://github.com/coloz/cordova-plugin-esptouch/tree/v1)**  
 
-如果需要使用esptouch v1，请访问[v1分支](https://github.com/coloz/cordova-plugin-esptouch/tree/v1)  
+配合esp8266、esp32进行esptouch v2配网的cordova插件，使用Espressif esptouch v2最新的库，可用于ionic、cordova项目  
 
 
 # espTouch v2 lib版本  

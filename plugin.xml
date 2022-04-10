@@ -36,15 +36,43 @@
   <!-- 	ios platform -->
   <platform name="ios">
     <config-file target="config.xml" parent="/*">
-      <feature name="esptouch">
-        <param name="ios-package" value="esptouch"/>
+      <feature name="esptouch2">
+        <param name="ios-package" value="esptouch2"/>
       </feature>
     </config-file>
-    <header-file src="src/ios/esptouch.h"/>
-    <source-file src="src/ios/esptouch.m"/>
-    <source-file src="src/ios/esptouch"/>
-    <source-file src="src/ios/libEsptouch_v0.3.7.0.a" framework="true"/>
-    <framework src="CoreGraphics.framework" />
+    <header-file src="src/ios/esptouch2.h"/>
+    <source-file src="src/ios/esptouch2.m"/>
+
+    <header-file src="src/ios/ESPTouchV2/ESPPacketUtils.h"/>
+    <source-file src="src/ios/ESPTouchV2/ESPPacketUtils.m"/>
+    <header-file src="src/ios/ESPTouchV2/ESPProvisioner.h"/>
+    <source-file src="src/ios/ESPTouchV2/ESPProvisioner.m"/>
+    <header-file src="src/ios/ESPTouchV2/ESPProvisioningListeners.h"/>
+    <header-file src="src/ios/ESPTouchV2/ESPProvisioningParams.h"/>
+    <source-file src="src/ios/ESPTouchV2/ESPProvisioningParams.m"/>
+    <header-file src="src/ios/ESPTouchV2/ESPProvisioningRequest.h"/>
+    <source-file src="src/ios/ESPTouchV2/ESPProvisioningRequest.m"/>
+    <header-file src="src/ios/ESPTouchV2/ESPProvisioningResult.h"/>
+    <source-file src="src/ios/ESPTouchV2/ESPProvisioningResult.m"/>
+    <header-file src="src/ios/ESPTouchV2/ESPProvisioningUDP.h"/>
+    <source-file src="src/ios/ESPTouchV2/ESPProvisioningUDP.m"/>
+    <header-file src="src/ios/CocoaAsyncSocket/GCD/GCDAsyncUdpSocket.h"/>
+    <source-file src="src/ios/CocoaAsyncSocket/GCD/GCDAsyncUdpSocket.m"/>
+
+    <header-file src="src/ios/ESPUtils/ESP_ByteUtil.h"/>
+    <source-file src="src/ios/ESPUtils/ESP_ByteUtil.m"/>
+    <header-file src="src/ios/ESPUtils/ESP_CRC8.h"/>
+    <source-file src="src/ios/ESPUtils/ESP_CRC8.m"/>
+    <header-file src="src/ios/ESPUtils/ESP_NetUtil.h"/>
+    <source-file src="src/ios/ESPUtils/ESP_NetUtil.m"/>
+    <header-file src="src/ios/ESPUtils/ESP_WifiUtil.h"/>
+    <source-file src="src/ios/ESPUtils/ESP_WifiUtil.m"/>
+    <header-file src="src/ios/ESPUtils/ESPAES.h"/>
+    <source-file src="src/ios/ESPUtils/ESPAES.m"/>
+    <header-file src="src/ios/ESPUtils/ESPTools.h"/>
+    <source-file src="src/ios/ESPUtils/ESPTools.m"/>
+    <header-file src="src/ios/ESPUtils/ESPVersionMacro.h"/>
+
     <framework src="UIKit.framework" />
     <framework src="Foundation.framework" />
   </platform>

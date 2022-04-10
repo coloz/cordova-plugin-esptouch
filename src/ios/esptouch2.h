@@ -1,15 +1,14 @@
 #import <Cordova/CDVPlugin.h>
 #import <Cordova/CDVPluginResult.h>
-#import "esptouch2/ESPPacketUtils.h"
-#import "esptouch2/ESPProvisioner.h"
-#import "esptouch2/ESPProvisioningParams.h"
-#import "esptouch2/ESPProvisioningRequest.h"
-#import "esptouch2/ESPProvisioningResult.h"
-#import "esptouch2/ESPProvisioningUDP.h"
+#import "ESPPacketUtils.h"
+#import "ESPProvisioner.h"
+#import "ESPProvisioningParams.h"
+#import "ESPProvisioningRequest.h"
+#import "ESPProvisioningResult.h"
+#import "ESPProvisioningUDP.h"
 
-@interface esptouch : CDVPlugin
-@property (nonatomic, strong) NSCondition *_condition;
-@property (atomic, strong) ESPTouchTask *_esptouchTask;
+@interface esptouch2 : CDVPlugin
+@property (atomic, strong) ESPProvisioner *provisioner;
 
 - (void)start:(CDVInvokedUrlCommand*)command;
 
