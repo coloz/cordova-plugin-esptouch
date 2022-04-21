@@ -1,11 +1,11 @@
 {
-  "name": "cordova-plugin-esptouch-v2",
-  "version": "0.0.3",
+  "name": "cordova-plugin-esptouch",
+  "version": "2.0.0",
   "description": "cordova plugin esptouch v2 for esp8266 and esp32",
   "author": "coloz",
   "license": "MIT",
   "cordova": {
-    "id": "cordova-plugin-esptouch-v2",
+    "id": "cordova-plugin-esptouch",
     "platforms": [
       "android",
       "ios"
