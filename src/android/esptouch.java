@@ -11,7 +11,6 @@ import com.espressif.iot.esptouch.EsptouchTask;
 import com.espressif.iot.esptouch.IEsptouchListener;
 import com.espressif.iot.esptouch.IEsptouchResult;
 import com.espressif.iot.esptouch.IEsptouchTask;
-import com.espressif.iot.esptouch.task.__IEsptouchTask;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
@@ -71,10 +70,11 @@ public class esptouch extends CordovaPlugin {
       esptouchCallbackContext = callbackContext;
       synchronized (mLock) {
         final byte[] apSsid = strToByteArray(args.getString(0));
-        final byte[] apBssid = strToByteArray(args.getString(1));
-        final byte[] apPassword = strToByteArray(args.getString(2));
-        final byte[] deviceCountData = strToByteArray(args.getString(3));
-        final byte[] broadcastData = strToByteArray(args.getString(4));
+        final byte[] apBssid = strToByteArray("000000");
+        Log.e(TAG, apBssid.toString());
+        final byte[] apPassword = strToByteArray(args.getString(1));
+        final byte[] deviceCountData = strToByteArray("1");
+        final byte[] broadcastData = strToByteArray("1");
         taskResultCount = deviceCountData.length == 0 ? -1 : Integer.parseInt(new String(deviceCountData));
         mEsptouchTask = new EsptouchTask(apSsid, apBssid, apPassword, cordova.getActivity());
         mEsptouchTask.setPackageBroadcast(broadcastData[0] == 49);
@@ -98,7 +98,9 @@ public class esptouch extends CordovaPlugin {
       );
       return true;
     } else if (action.equals("stop")) {
-      mEsptouchTask.interrupt();
+      if (mEsptouchTask != null) {
+        mEsptouchTask.interrupt();
+      }
       callbackContext.success();
     } else {
       callbackContext.error("can not find the function " + action);
