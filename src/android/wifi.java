@@ -1,11 +1,9 @@
 package com.coloz.wifi;
 
-import android.Manifest;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.location.LocationManager;
+
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.util.Log;
 
 import com.espressif.iot.esptouch2.provision.TouchNetUtil;
 
@@ -22,33 +20,37 @@ import org.json.JSONObject;
 public class wifi extends CordovaPlugin {
 
     private CallbackContext wifiCallbackContext;
-
+    private static final String TAG = "wifi";
     private WifiManager mWifiManager;
 
     protected void getConnectedInfo() {
         JSONObject result = new JSONObject();
         WifiInfo wifiInfo = mWifiManager.getConnectionInfo();
         boolean connected = TouchNetUtil.isWifiConnected(mWifiManager);
-        if (!connected) {
-            result.put("message", getString(R.string.esptouch_message_wifi_connection));
-            wifiCallbackContext.error(result);
-        }
-        String ssid = TouchNetUtil.getSsidString(wifiInfo);
-        String ip;
-        int ipValue = wifiInfo.getIpAddress();
-        if (ipValue != 0) {
-            ip = TouchNetUtil.getAddress(wifiInfo.getIpAddress());
-        } else {
-            ip = TouchNetUtil.getIPv4Address();
-            if (ip == null) {
-                ip = TouchNetUtil.getIPv6Address();
+        try {
+            if (!connected) {
+                result.put("message", "WiFi is not connected");
+                wifiCallbackContext.error(result);
             }
+            String ssid = TouchNetUtil.getSsidString(wifiInfo);
+            InetAddress ip;
+            int ipValue = wifiInfo.getIpAddress();
+            if (ipValue != 0) {
+                ip = TouchNetUtil.getAddress(wifiInfo.getIpAddress());
+            } else {
+                ip = TouchNetUtil.getIPv4Address();
+                if (ip == null) {
+                    ip = TouchNetUtil.getIPv6Address();
+                }
+            }
+            result.put("address", ip);
+            result.put("is5G", TouchNetUtil.is5G(wifiInfo.getFrequency()));
+            result.put("ssid", ssid);
+            result.put("bssid", wifiInfo.getBSSID());
+            wifiCallbackContext.success(result);
+        }catch (JSONException e){
+            Log.e(TAG, "unexpected JSON exception", e);
         }
-        result.put("address", ip);
-        result.put("is5G", TouchNetUtil.is5G(wifiInfo.getFrequency()));
-        result.put("ssid", ssid);
-        result.put("bssid", wifiInfo.getBSSID());
-        wifitouchCallbackContext.success(result);
     }
 
     @Override
