@@ -1,6 +1,6 @@
 package com.coloz.wifi;
 
-
+import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.util.Log;
@@ -43,7 +43,7 @@ public class wifi extends CordovaPlugin {
                     ip = TouchNetUtil.getIPv6Address();
                 }
             }
-            result.put("address", ip);
+            result.put("ip", ip);
             result.put("is5G", TouchNetUtil.is5G(wifiInfo.getFrequency()));
             result.put("ssid", ssid);
             result.put("bssid", wifiInfo.getBSSID());
@@ -51,6 +51,12 @@ public class wifi extends CordovaPlugin {
         }catch (JSONException e){
             Log.e(TAG, "unexpected JSON exception", e);
         }
+    }
+
+    @Override
+    public void initialize(CordovaInterface cordova, CordovaWebView webView) {
+      super.initialize(cordova, webView);
+      mWifiManager = (WifiManager) cordova.getActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
     }
 
     @Override

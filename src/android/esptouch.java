@@ -70,8 +70,7 @@ public class esptouch extends CordovaPlugin {
       esptouchCallbackContext = callbackContext;
       synchronized (mLock) {
         final byte[] apSsid = strToByteArray(args.getString(0));
-        final byte[] apBssid = strToByteArray("000000");
-        Log.e(TAG, apBssid.toString());
+        final byte[] apBssid = {0,0,0,0,0,0};
         final byte[] apPassword = strToByteArray(args.getString(1));
         final byte[] deviceCountData = strToByteArray("1");
         final byte[] broadcastData = strToByteArray("1");
