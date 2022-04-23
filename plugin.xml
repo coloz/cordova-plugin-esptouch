@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-esptouch" version="1.0.9">
-  <name>Cordova esptouch v2</name>
-  <description>Cordova esptouch v2 plugin for esp8266 and ESP32</description>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-esptouch" version="2.0.0">
+  <name>Cordova esptouch</name>
+  <description>Cordova esptouch plugin for esp8266 and ESP32</description>
   <license>Apache 2.0</license>
   <keywords>cordova,console</keywords>
   <repo>https://github.com/coloz/cordova-plugin-esptouch.git</repo>
