@@ -1,10 +1,12 @@
 package com.coloz.wifi;
 
 import android.content.Context;
+import android.location.LocationManager;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.net.wifi.SupplicantState;
 import android.util.Log;
+import android.os.Build;
 
 import com.espressif.iot.esptouch2.provision.TouchNetUtil;
 
@@ -23,6 +25,22 @@ public class wifi extends CordovaPlugin {
     private CallbackContext wifiCallbackContext;
     private static final String TAG = "wifi";
     private WifiManager mWifiManager;
+    private LocationManager mLocationManager;
+
+    protected void checkLocation() {
+        JSONObject result = new JSONObject();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            boolean gps = mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            boolean network = mLocationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+            if (gps || network){
+                wifiCallbackContext.success(1);
+            }else{
+                wifiCallbackContext.success(0);
+            }
+            return;
+        }
+        wifiCallbackContext.success(1);
+    }
 
     protected void getConnectedInfo() {
         JSONObject result = new JSONObject();
@@ -65,6 +83,8 @@ public class wifi extends CordovaPlugin {
         super.initialize(cordova, webView);
         mWifiManager = (WifiManager) cordova.getActivity().getApplicationContext()
                 .getSystemService(Context.WIFI_SERVICE);
+        mLocationManager= (LocationManager) cordova.getActivity().getApplicationContext()
+                .getSystemService(Context.LOCATION_SERVICE);
     }
 
     @Override
@@ -72,7 +92,9 @@ public class wifi extends CordovaPlugin {
             throws JSONException {
         wifiCallbackContext = callbackContext;
 
-        if (action.equals("getConnectedInfo")) {
+        if (action.equals("checkLocation")) {
+            checkLocation();
+        } else if (action.equals("getConnectedInfo")) {
             getConnectedInfo();
         } else if (action.equals("scan")) {
 

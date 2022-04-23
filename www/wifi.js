@@ -1,6 +1,9 @@
 var exec = require('cordova/exec');
 
 module.exports = {
+  checkLocation: function (successCallback, failCallback) {
+    exec(successCallback, failCallback, "wifi", "checkLocation");
+  },
   getConnectedInfo: function (successCallback, failCallback) {
     exec(successCallback, failCallback, "wifi", "getConnectedInfo");
   },
