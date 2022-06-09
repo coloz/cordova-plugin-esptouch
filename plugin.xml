@@ -81,6 +81,27 @@
     <source-file src="src/ios/ESPTouchV2/ESPProvisioningResult.m" />
     <header-file src="src/ios/ESPTouchV2/ESPProvisioningUDP.h" />
     <source-file src="src/ios/ESPTouchV2/ESPProvisioningUDP.m" />
+
+    <header-file src="src/ios/ESPTouch/esptouch/ESPTouchDelegate.h" />
+    <header-file src="src/ios/ESPTouch/esptouch/ESPTouchResult.h" />
+    <header-file src="src/ios/ESPTouch/esptouch/ESPTouchTask.h" />
+    <header-file src="src/ios/ESPTouch/protocol/ESPDataCode.h" />
+    <source-file src="src/ios/ESPTouch/protocol/ESPDataCode.m" />
+    <header-file src="src/ios/ESPTouch/protocol/ESPDatumCode.h" />
+    <source-file src="src/ios/ESPTouch/protocol/ESPDatumCode.m" />
+    <header-file src="src/ios/ESPTouch/protocol/ESPGuideCode.h" />
+    <source-file src="src/ios/ESPTouch/protocol/ESPGuideCode.m" />
+    <header-file src="src/ios/ESPTouch/protocol/ESPTouchGenerator.h" />
+    <source-file src="src/ios/ESPTouch/protocol/ESPTouchGenerator.m" />
+    <source-file src="src/ios/ESPTouch/task/ESPTouchResult.m" />
+    <source-file src="src/ios/ESPTouch/task/ESPTouchTask.m" />
+    <header-file src="src/ios/ESPTouch/task/ESPTouchTaskParameter.h" />
+    <source-file src="src/ios/ESPTouch/task/ESPTouchTaskParameter.m" />
+    <header-file src="src/ios/ESPTouch/udp/ESPUDPSocketClient.h" />
+    <source-file src="src/ios/ESPTouch/udp/ESPUDPSocketClient.m" />
+    <header-file src="src/ios/ESPTouch/udp/ESPUDPSocketServer.h" />
+    <source-file src="src/ios/ESPTouch/udp/ESPUDPSocketServer.m" />
+
     <header-file src="src/ios/CocoaAsyncSocket/GCD/GCDAsyncUdpSocket.h" />
     <source-file src="src/ios/CocoaAsyncSocket/GCD/GCDAsyncUdpSocket.m" />
 
