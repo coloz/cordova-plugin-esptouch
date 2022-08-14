@@ -1,125 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-esptouch" version="2.0.0">
-  <name>Cordova esptouch</name>
-  <description>Cordova esptouch plugin for esp8266 and ESP32</description>
-  <license>Apache 2.0</license>
-  <keywords>cordova,console</keywords>
-  <repo>https://github.com/coloz/cordova-plugin-esptouch.git</repo>
-
-  <engines>
-    <engine name="cordova-android" version=">=7.0.0" />
-  </engines>
-
-  <js-module name="esptouch" src="www/esptouch.js">
-    <clobbers target="esptouch" />
-  </js-module>
-
-  <js-module name="esptouch2" src="www/esptouch2.js">
-    <clobbers target="esptouch2" />
-  </js-module>
-
-  <js-module name="wifi" src="www/wifi.js">
-    <clobbers target="wifi" />
-  </js-module>
-
-  <!-- 	android platform -->
-  <platform name="android">
-    <config-file target="AndroidManifest.xml" parent="/*">
-      <uses-permission android:name="android.permission.INTERNET" />
-      <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-      <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-      <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
-      <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-      <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    </config-file>
-    <config-file parent="/*" target="res/xml/config.xml">
-      <feature name="esptouch">
-        <param name="android-package" value="com.coloz.esptouch.esptouch" />
-        <param name="onload" value="true" />
-      </feature>
-    </config-file>
-    <config-file parent="/*" target="res/xml/config.xml">
-      <feature name="esptouch2">
-        <param name="android-package" value="com.coloz.esptouch2.esptouch2" />
-        <param name="onload" value="true" />
-      </feature>
-    </config-file>
-    <config-file parent="/*" target="res/xml/config.xml">
-      <feature name="wifi">
-        <param name="android-package" value="com.coloz.wifi.wifi" />
-        <param name="onload" value="true" />
-      </feature>
-    </config-file>
-    <source-file src="src/android/esptouch.java" target-dir="src/com/coloz/esptouch/" />
-    <source-file src="src/android/esptouch2.java" target-dir="src/com/coloz/esptouch2/" />
-    <source-file src="src/android/wifi.java" target-dir="src/com/coloz/wifi/" />
-    <lib-file src="src/android/esptouch-v1-1.0.0.jar" />
-    <lib-file src="src/android/esptouch-v2-2.1.0.jar" />
-    <preference name="ANDROID_SUPPORT_VERSION" default="28.+" />
-    <framework src="com.android.support:support-v4:$ANDROID_SUPPORT_VERSION" />
-  </platform>
-  <!-- 	ios platform -->
-  <platform name="ios">
-    <config-file target="config.xml" parent="/*">
-      <feature name="esptouch2">
-        <param name="ios-package" value="esptouch2" />
-      </feature>
-    </config-file>
-    <header-file src="src/ios/esptouch2.h" />
-    <source-file src="src/ios/esptouch2.m" />
-
-    <header-file src="src/ios/ESPTouchV2/ESPPacketUtils.h" />
-    <source-file src="src/ios/ESPTouchV2/ESPPacketUtils.m" />
-    <header-file src="src/ios/ESPTouchV2/ESPProvisioner.h" />
-    <source-file src="src/ios/ESPTouchV2/ESPProvisioner.m" />
-    <header-file src="src/ios/ESPTouchV2/ESPProvisioningListeners.h" />
-    <header-file src="src/ios/ESPTouchV2/ESPProvisioningParams.h" />
-    <source-file src="src/ios/ESPTouchV2/ESPProvisioningParams.m" />
-    <header-file src="src/ios/ESPTouchV2/ESPProvisioningRequest.h" />
-    <source-file src="src/ios/ESPTouchV2/ESPProvisioningRequest.m" />
-    <header-file src="src/ios/ESPTouchV2/ESPProvisioningResult.h" />
-    <source-file src="src/ios/ESPTouchV2/ESPProvisioningResult.m" />
-    <header-file src="src/ios/ESPTouchV2/ESPProvisioningUDP.h" />
-    <source-file src="src/ios/ESPTouchV2/ESPProvisioningUDP.m" />
-
-    <header-file src="src/ios/ESPTouch/esptouch/ESPTouchDelegate.h" />
-    <header-file src="src/ios/ESPTouch/esptouch/ESPTouchResult.h" />
-    <header-file src="src/ios/ESPTouch/esptouch/ESPTouchTask.h" />
-    <header-file src="src/ios/ESPTouch/protocol/ESPDataCode.h" />
-    <source-file src="src/ios/ESPTouch/protocol/ESPDataCode.m" />
-    <header-file src="src/ios/ESPTouch/protocol/ESPDatumCode.h" />
-    <source-file src="src/ios/ESPTouch/protocol/ESPDatumCode.m" />
-    <header-file src="src/ios/ESPTouch/protocol/ESPGuideCode.h" />
-    <source-file src="src/ios/ESPTouch/protocol/ESPGuideCode.m" />
-    <header-file src="src/ios/ESPTouch/protocol/ESPTouchGenerator.h" />
-    <source-file src="src/ios/ESPTouch/protocol/ESPTouchGenerator.m" />
-    <source-file src="src/ios/ESPTouch/task/ESPTouchResult.m" />
-    <source-file src="src/ios/ESPTouch/task/ESPTouchTask.m" />
-    <header-file src="src/ios/ESPTouch/task/ESPTouchTaskParameter.h" />
-    <source-file src="src/ios/ESPTouch/task/ESPTouchTaskParameter.m" />
-    <header-file src="src/ios/ESPTouch/udp/ESPUDPSocketClient.h" />
-    <source-file src="src/ios/ESPTouch/udp/ESPUDPSocketClient.m" />
-    <header-file src="src/ios/ESPTouch/udp/ESPUDPSocketServer.h" />
-    <source-file src="src/ios/ESPTouch/udp/ESPUDPSocketServer.m" />
-
-    <header-file src="src/ios/CocoaAsyncSocket/GCD/GCDAsyncUdpSocket.h" />
-    <source-file src="src/ios/CocoaAsyncSocket/GCD/GCDAsyncUdpSocket.m" />
-
-    <header-file src="src/ios/ESPUtils/ESP_ByteUtil.h" />
-    <source-file src="src/ios/ESPUtils/ESP_ByteUtil.m" />
-    <header-file src="src/ios/ESPUtils/ESP_CRC8.h" />
-    <source-file src="src/ios/ESPUtils/ESP_CRC8.m" />
-    <header-file src="src/ios/ESPUtils/ESP_NetUtil.h" />
-    <source-file src="src/ios/ESPUtils/ESP_NetUtil.m" />
-    <header-file src="src/ios/ESPUtils/ESP_WifiUtil.h" />
-    <source-file src="src/ios/ESPUtils/ESP_WifiUtil.m" />
-    <header-file src="src/ios/ESPUtils/ESPAES.h" />
-    <source-file src="src/ios/ESPUtils/ESPAES.m" />
-    <header-file src="src/ios/ESPUtils/ESPTools.h" />
-    <source-file src="src/ios/ESPUtils/ESPTools.m" />
-    <header-file src="src/ios/ESPUtils/ESPVersionMacro.h" />
-
-    <framework src="UIKit.framework" />
-    <framework src="Foundation.framework" />
-  </platform>
+	<name>
+		Cordova esptouch
+	</name>
+	<description>
+		Cordova esptouch plugin for esp8266 and ESP32
+	</description>
+	<license>
+		Apache 2.0
+	</license>
+	<keywords>
+		cordova,console
+	</keywords>
+	<repo>
+		https://github.com/coloz/cordova-plugin-esptouch.git
+	</repo>
+	<engines>
+		<engine name="cordova-android" version=">=7.0.0" />
+	</engines>
+	<js-module name="esptouch" src="www/esptouch.js">
+		<clobbers target="esptouch" />
+	</js-module>
+	<js-module name="esptouch2" src="www/esptouch2.js">
+		<clobbers target="esptouch2" />
+	</js-module>
+	<js-module name="wifi" src="www/wifi.js">
+		<clobbers target="wifi" />
+	</js-module>
+	<!-- android platform -->
+	<platform name="android">
+		<config-file target="AndroidManifest.xml" parent="/*">
+			<uses-permission android:name="android.permission.INTERNET" />
+			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+			<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+			<uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+			<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+			<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+		</config-file>
+		<config-file parent="/*" target="res/xml/config.xml">
+			<feature name="esptouch">
+				<param name="android-package" value="com.coloz.esptouch.esptouch" />
+				<param name="onload" value="true" />
+			</feature>
+		</config-file>
+		<config-file parent="/*" target="res/xml/config.xml">
+			<feature name="esptouch2">
+				<param name="android-package" value="com.coloz.esptouch2.esptouch2" />
+				<param name="onload" value="true" />
+			</feature>
+		</config-file>
+		<config-file parent="/*" target="res/xml/config.xml">
+			<feature name="wifi">
+				<param name="android-package" value="com.coloz.wifi.wifi" />
+				<param name="onload" value="true" />
+			</feature>
+		</config-file>
+		<source-file src="src/android/esptouch.java" target-dir="src/com/coloz/esptouch/" />
+		<source-file src="src/android/esptouch2.java" target-dir="src/com/coloz/esptouch2/" />
+		<source-file src="src/android/wifi.java" target-dir="src/com/coloz/wifi/" />
+		<lib-file src="src/android/esptouch-v1-1.0.0.jar" />
+		<lib-file src="src/android/esptouch-v2-2.1.0.jar" />
+		<preference name="ANDROID_SUPPORT_VERSION" default="28.+" />
+		<framework src="com.android.support:support-v4:$ANDROID_SUPPORT_VERSION" />
+	</platform>
+	<!-- ios platform -->
+	<platform name="ios">
+		<config-file target="config.xml" parent="/*">
+			<feature name="esptouch">
+				<param name="ios-package" value="esptouch" />
+			</feature>
+		</config-file>
+		<header-file src="src/ios/esptouch.h" />
+		<source-file src="src/ios/esptouch.m" />
+		<config-file target="config.xml" parent="/*">
+			<feature name="esptouch2">
+				<param name="ios-package" value="esptouch2" />
+			</feature>
+		</config-file>
+		<header-file src="src/ios/esptouch2.h" />
+		<source-file src="src/ios/esptouch2.m" />
+		<config-file target="config.xml" parent="/*">
+			<feature name="wifi">
+				<param name="ios-package" value="wifi" />
+			</feature>
+		</config-file>
+		<header-file src="src/ios/wifi.h" />
+		<source-file src="src/ios/wifi.m" />
+		<header-file src="src/ios/ESPTouchV2/ESPPacketUtils.h" />
+		<source-file src="src/ios/ESPTouchV2/ESPPacketUtils.m" />
+		<header-file src="src/ios/ESPTouchV2/ESPProvisioner.h" />
+		<source-file src="src/ios/ESPTouchV2/ESPProvisioner.m" />
+		<header-file src="src/ios/ESPTouchV2/ESPProvisioningListeners.h" />
+		<header-file src="src/ios/ESPTouchV2/ESPProvisioningParams.h" />
+		<source-file src="src/ios/ESPTouchV2/ESPProvisioningParams.m" />
+		<header-file src="src/ios/ESPTouchV2/ESPProvisioningRequest.h" />
+		<source-file src="src/ios/ESPTouchV2/ESPProvisioningRequest.m" />
+		<header-file src="src/ios/ESPTouchV2/ESPProvisioningResult.h" />
+		<source-file src="src/ios/ESPTouchV2/ESPProvisioningResult.m" />
+		<header-file src="src/ios/ESPTouchV2/ESPProvisioningUDP.h" />
+		<source-file src="src/ios/ESPTouchV2/ESPProvisioningUDP.m" />
+		<header-file src="src/ios/ESPTouch/esptouch/ESPTouchDelegate.h" />
+		<header-file src="src/ios/ESPTouch/esptouch/ESPTouchResult.h" />
+		<header-file src="src/ios/ESPTouch/esptouch/ESPTouchTask.h" />
+		<header-file src="src/ios/ESPTouch/protocol/ESPDataCode.h" />
+		<source-file src="src/ios/ESPTouch/protocol/ESPDataCode.m" />
+		<header-file src="src/ios/ESPTouch/protocol/ESPDatumCode.h" />
+		<source-file src="src/ios/ESPTouch/protocol/ESPDatumCode.m" />
+		<header-file src="src/ios/ESPTouch/protocol/ESPGuideCode.h" />
+		<source-file src="src/ios/ESPTouch/protocol/ESPGuideCode.m" />
+		<header-file src="src/ios/ESPTouch/protocol/ESPTouchGenerator.h" />
+		<source-file src="src/ios/ESPTouch/protocol/ESPTouchGenerator.m" />
+		<source-file src="src/ios/ESPTouch/task/ESPTouchResult.m" />
+		<source-file src="src/ios/ESPTouch/task/ESPTouchTask.m" />
+		<header-file src="src/ios/ESPTouch/task/ESPTouchTaskParameter.h" />
+		<source-file src="src/ios/ESPTouch/task/ESPTouchTaskParameter.m" />
+		<header-file src="src/ios/ESPTouch/udp/ESPUDPSocketClient.h" />
+		<source-file src="src/ios/ESPTouch/udp/ESPUDPSocketClient.m" />
+		<header-file src="src/ios/ESPTouch/udp/ESPUDPSocketServer.h" />
+		<source-file src="src/ios/ESPTouch/udp/ESPUDPSocketServer.m" />
+		<header-file src="src/ios/CocoaAsyncSocket/GCD/GCDAsyncUdpSocket.h" />
+		<source-file src="src/ios/CocoaAsyncSocket/GCD/GCDAsyncUdpSocket.m" />
+		<header-file src="src/ios/ESPUtils/ESP_ByteUtil.h" />
+		<source-file src="src/ios/ESPUtils/ESP_ByteUtil.m" />
+		<header-file src="src/ios/ESPUtils/ESP_CRC8.h" />
+		<source-file src="src/ios/ESPUtils/ESP_CRC8.m" />
+		<header-file src="src/ios/ESPUtils/ESP_NetUtil.h" />
+		<source-file src="src/ios/ESPUtils/ESP_NetUtil.m" />
+		<header-file src="src/ios/ESPUtils/ESP_WifiUtil.h" />
+		<source-file src="src/ios/ESPUtils/ESP_WifiUtil.m" />
+		<header-file src="src/ios/ESPUtils/ESPAES.h" />
+		<source-file src="src/ios/ESPUtils/ESPAES.m" />
+		<header-file src="src/ios/ESPUtils/ESPTools.h" />
+		<source-file src="src/ios/ESPUtils/ESPTools.m" />
+		<header-file src="src/ios/ESPUtils/ESPVersionMacro.h" />
+		<framework src="UIKit.framework" />
+		<framework src="Foundation.framework" />
+	</platform>
 </plugin>

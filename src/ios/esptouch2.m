@@ -1,7 +1,7 @@
 #import "esptouch2.h"
 #import "ESP_ByteUtil.h"
 
-NSString *callback_ID;
+NSString *callback_ID2;
 
 @implementation esptouch2
 
@@ -11,7 +11,7 @@ NSString *callback_ID;
         NSDictionary *device =@{@"bssid":result.bssid,@"ip":result.address};
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary: device];
         [pluginResult setKeepCallbackAsBool:true];
-        [self.commandDelegate sendPluginResult:pluginResult callbackId:callback_ID];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:callback_ID2];
         // [self.resultArray addObject:result];
         // [self.resultView reloadData];
         // if ([self.request.deviceCount intValue] > 0) {
@@ -26,7 +26,7 @@ NSString *callback_ID;
 - (void) start:(CDVInvokedUrlCommand *)command{
     [self.commandDelegate runInBackground:^{
         dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-        callback_ID = command.callbackId;
+        callback_ID2 = command.callbackId;
 
         NSString *apSsid = (NSString *)[command.arguments objectAtIndex:0];
         NSString *apPassword = (NSString *)[command.arguments objectAtIndex:1];
