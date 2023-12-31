@@ -1,6 +1,7 @@
 # cordova-plugin-esptouch 2.0
-
 配合esp8266、esp32进行esptouch配网的cordova插件，集成了esptouch V1、V2, 并提供配网时必要的wifi检查功能，可用于ionic、cordova项目。  
+
+本程序不在维护，新版本为[capacitor-esptouch](https://github.com/coloz/capacitor-esptouch)  
   
 ## 支持平台  
 ios 12.x  
